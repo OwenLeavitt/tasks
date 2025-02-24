@@ -5,7 +5,12 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    let newNumbers: number[] = [];
+    if (numbers.length > 0) {
+        newNumbers.push(numbers[0]);
+        newNumbers.push(numbers[numbers.length - 1]);
+    }
+    return newNumbers;
 }
 
 /**
@@ -13,7 +18,8 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    let tripledNums = numbers.map((num: number): number => num * 3);
+    return tripledNums;
 }
 
 /**
@@ -21,7 +27,10 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    let numList = numbers.map((x: string): number =>
+        isNaN(parseInt(x)) ? 0 : parseInt(x),
+    );
+    return numList;
 }
 
 /**
@@ -32,7 +41,10 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    let numList = amounts.map((x: string): number =>
+        isNaN(parseInt(x.replace("$", ""))) ? 0 : parseInt(x.replace("$", "")),
+    );
+    return numList;
 };
 
 /**
@@ -41,7 +53,11 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    let newList = messages.map((x: string): string =>
+        x.endsWith("!") ? x.toUpperCase() : x,
+    );
+    newList = newList.filter((x: string): boolean => !x.endsWith("?"));
+    return newList;
 };
 
 /**
@@ -49,7 +65,9 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    let newList = words.filter((x: string): boolean => x.length < 4);
+    let wordlen = newList.length;
+    return wordlen;
 }
 
 /**
@@ -58,7 +76,14 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    let newList = colors.filter(
+        (x: string): boolean => x === "red" || x === "blue" || x === "green",
+    );
+    if (newList.length === colors.length) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -69,7 +94,20 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    if (addends.length === 0) {
+        return "0=0";
+    } else {
+        let finalString = addends
+            .reduce(
+                (currentTotal: number, num: number) => currentTotal + num,
+                0,
+            )
+            .toString();
+        finalString = finalString + "=";
+        finalString = finalString + addends.toString();
+        finalString = finalString.replace(/,/g, "+");
+        return finalString;
+    }
 }
 
 /**
@@ -82,5 +120,26 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let negIndex = values.findIndex((value: number): boolean => value < 0);
+    let newList = [...values];
+    console.log(negIndex);
+    if (values.length === 0) {
+        return [0];
+    } else if (negIndex === -1) {
+        let sum = values.reduce(
+            (currentTotal: number, num: number) => currentTotal + num,
+            0,
+        );
+        newList.splice(newList.length, 0, sum);
+        return newList;
+    } else {
+        let sum = values
+            .slice(0, negIndex)
+            .reduce(
+                (currentTotal: number, num: number) => currentTotal + num,
+                0,
+            );
+        newList.splice(negIndex + 1, 0, sum);
+        return newList;
+    }
 }
