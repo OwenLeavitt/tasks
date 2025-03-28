@@ -39,7 +39,6 @@ export function getNonEmptyQuestions(questions: Question[]): Question[] {
 export function findQuestion(
     questions: Question[],
     id: number,
-    id: number,
 ): Question | null {
     let newArray: Question[] = [...questions];
     newArray = newArray.filter(
@@ -116,7 +115,6 @@ export function addNewQuestion(
     id: number,
     name: string,
     type: QuestionType,
-    type: QuestionType,
 ): Question[] {
     let newArray: Question[] = [...questions];
     newArray.push(makeBlankQuestion(id, name, type));
@@ -134,7 +132,6 @@ export function addNewQuestion(
 export function renameQuestionById(
     questions: Question[],
     targetId: number,
-    newName: string,
     newName: string,
 ): Question[] {
     let newArray: Question[] = [...questions];
@@ -165,11 +162,7 @@ export function editOption(
     targetId: number,
     targetOptionIndex: number,
     newOption: string,
-    newOption: string,
 ): Question[] {
-    return [];
-}
-
     let newArray: Question[] = [...questions];
     for (let i: number = 0; i < newArray.length; i++) {
         if (newArray[i].id === targetId) {

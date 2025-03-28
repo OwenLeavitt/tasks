@@ -122,7 +122,6 @@ export function makeMath(addends: number[]): string {
 export function injectPositive(values: number[]): number[] {
     let negIndex = values.findIndex((value: number): boolean => value < 0);
     let newList = [...values];
-    console.log(negIndex);
     if (values.length === 0) {
         return [0];
     } else if (negIndex === -1) {
