@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, JSX } from "react";
+import { Form } from "react-bootstrap";
 
 export function CheckAnswer({
     expectedAnswer,
 }: {
     expectedAnswer: string;
-}): React.JSX.Element {
+}): JSX.Element {
+    const [userAnswer, setUserAnswer] = useState<string>("");
+
     return (
         <div>
-            <h3>Check Answer</h3>
+            <Form.Group controlId="formCheckAnswer">
+                <Form.Control
+                    value={userAnswer}
+                    onChange={(e) => {
+                        setUserAnswer(e.target.value);
+                    }}
+                />
+            </Form.Group>
+            <div>{userAnswer === expectedAnswer ? "✔️" : "❌"}</div>
         </div>
     );
 }
